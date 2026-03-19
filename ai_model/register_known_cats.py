@@ -36,7 +36,7 @@ def register_known_cats(dataset_path="post_processing", output_file="cat_embeddi
         return []
     
     embeddings_db = []
-    cat_folders = [f for f in os.listdir(dataset_path) if f.startswith('cat_')]
+    cat_folders = [f for f in os.listdir(dataset_path) if os.path.isdir(os.path.join(dataset_path, f))]
     
     print(f"Found {len(cat_folders)} cat folders")
     
@@ -56,7 +56,7 @@ def register_known_cats(dataset_path="post_processing", output_file="cat_embeddi
             continue
         
         print(f"Processing {cat_folder} with {len(image_files)} images")
-        
+                
         # Create embeddings for each image
         for img_file in image_files:
             img_path = os.path.join(cat_path, img_file)
